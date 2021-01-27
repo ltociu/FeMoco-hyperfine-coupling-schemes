@@ -1,18 +1,18 @@
-#in Python 3 regular division is actually integer division unless you include the from __future__ import division thing
+
+# Note: This script was written in 2016.
+
 from __future__ import division
 from numpy import *
 from math import *
-import Schemes.py
 
-# Aici am scris formula aceea care trebuie aplicata recurent de jos in sus. x e spinul 'copilului' si y e spinul 'parintelui'
 
+# Calculating the hyperfine coefficient
 def coeff(x,y):
     a=abs(x)
     b=abs(abs(y)-abs(x))
     c=abs(y)
     return (c*(c+1)+a*(a+1)-b*(b+1))/(2*c*(c+1)) 
 
-# Functie care aplica formula recursiv de jos in sus. Un coupling_scheme arata asa:  [[1], [1,2], [1, 2, 3, 4, 5], [1, 2, 3, 4, 5, 6, 7]]
 
 def calc_coeff(coupling_scheme):
     k=1
@@ -20,15 +20,14 @@ def calc_coeff(coupling_scheme):
         k=k*coeff(sum(coupling_scheme[i]),sum(coupling_scheme[i+1]))
     return k
 
-# Functie care calculeaza suma tuturor numerelor dintr-un list
-
+# function that calculates sum of elements in a list
 def sum(l):
     sum=0
     for i in range(len(l)):
         sum=sum+l[i]
     return sum
 
-# Functie care schimba numerele dintr-un coupling scheme in spinii corespunzatori numerelor acelora. S va fi o lista de forma [2, 2, 2, 2, -2.5, -2.5, -2.5]
+# Function that replaces the spin number by the actual spin
 
 def replace(list):
     for i in range(len(list)):
@@ -58,7 +57,7 @@ def is_ordered(l):
             z = 0
     return z
 
-# Functie care transforma o lista intr-un string
+# Function that turns a list of characters into a string
 
 def st(l):
     stri=''
@@ -66,7 +65,7 @@ def st(l):
         stri = stri+str(l[i])
     return stri
     
-# Functie care ia un coupling scheme de genul celor care le vei genera tu :D si le prelucreaza ca sa arata asa: [[1], [1, 2], [1, 2 ,3] etc ect].  l va fi de exemplu [1] si m coupling scheme-ul.
+# Function that takes a coupling scheme and turns it into a list such as [[1], [1, 2], [1, 2 ,3] etc ect]. 
 
 def gen(l,m):
     scheme=[l]
